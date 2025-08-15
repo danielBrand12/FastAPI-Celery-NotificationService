@@ -17,7 +17,7 @@
             ]
         },
         {
-            "name": "chatbot-genai",
+            "name": "send-email",
             "type": "debugpy",
             "request": "launch",
             "module": "celery",
@@ -25,11 +25,11 @@
             "cwd": "${workspaceFolder}",
             "args": [
                 "-A",
-                "app.worker.genai_worker",
+                "app.workers.send_email",
                 //"app.celery_conf",
                 "worker",
                 "-Q",
-                "genai-chatbot",
+                "send-email",
                 "--loglevel=info",
                 "-c",
                 "1",

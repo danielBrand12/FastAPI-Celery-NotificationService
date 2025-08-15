@@ -26,6 +26,8 @@ oauth2_scheme = OAuth2PasswordBearer(
         "read": "Read items",
         "update": "Update items",
         "delete": "Delete items",
+        "create:product": "Create products",
+        "update:user": "Update user information",
     }
 )
 
@@ -36,7 +38,7 @@ pwd_context = CryptContext(schemes=["argon2", "bcrypt"], deprecated="auto")
 async def authenticate_user(username: str, password: str) -> dict[str, Any] | None:
     user = await UserService.all().filter(**{"username": username})
     if not user:
-        return {}
+        return {}, {}
     user_returned = user[0]
     role = await RoleService.all().filter(**{"id": user_returned.role_id})
 

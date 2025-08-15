@@ -2,7 +2,7 @@ from tortoise import fields, models
 
 
 class Role(models.Model): 
-    id = fields.TextField(pk=True)
+    id = fields.IntField(pk=True)
     name = fields.CharField(max_length=255)
     description = fields.TextField(null=True)
     scopes = fields.JSONField(null=True)

@@ -9,9 +9,9 @@ router = APIRouter()
 
 @router.post("", response_model=OrderInDB)
 async def create_order_from_cart(
+    current_user: Annotated[User, Security(get_current_active_user, scopes=["create"])],
     user_id: int, 
-    created_by: int, 
-    current_user: Annotated[User, Security(get_current_active_user, scopes=["create"])]
+    created_by: int | None = None, 
 ):
     return await order_service.create_from_cart(user_id, created_by)
 

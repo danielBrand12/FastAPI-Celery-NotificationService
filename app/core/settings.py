@@ -7,18 +7,22 @@ class Settings(BaseSettings):
     ENV: str = "dev"
     DEBUG: bool = True
     # DB
-    POSTGRES_HOST: str
+    POSTGRES_HOST: str | None = None
     POSTGRES_PORT: int = 5432
-    POSTGRES_DB: str
-    POSTGRES_USER: str
-    POSTGRES_PASSWORD: str
+    POSTGRES_DB: str | None = None
+    POSTGRES_USER: str | None = None
+    POSTGRES_PASSWORD: str | None = None
     POSTGRES_MINSIZE: int = 1
     POSTGRES_MAXSIZE: int = 10
+    # Broker
+    CELERY_BROKER_URL: AnyUrl | None = None
+    CELERY_RESULT_BACKEND: AnyUrl | None = None
+
     # Celery
-    CELERY_BROKER_URL: AnyUrl
+    CELERY_BROKER_URL: AnyUrl | None = None
     CELERY_RESULT_BACKEND: AnyUrl | None = None
     # Auth
-    JWT_SECRET_KEY: str
+    JWT_SECRET_KEY: str | None = None
     JWT_ALG: str = "HS256"
     JWT_EXPIRES_MIN: int = 60
     # Email (elige SendGrid o SMTP dev)
@@ -28,5 +32,7 @@ class Settings(BaseSettings):
     SMTP_USER: str | None = None
     SMTP_PASSWORD: str | None = None
     EMAIL_FROM: str = "no-reply@example.com"
+
+    CREATE_DEFAULT_DATA: bool = True
 
 settings = Settings()

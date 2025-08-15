@@ -1,5 +1,4 @@
 from celery import Celery
-import os
 from app.core.settings import settings
 
 CELERY_BROKER = settings.CELERY_BROKER_URL

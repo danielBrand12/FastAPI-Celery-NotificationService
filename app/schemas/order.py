@@ -11,7 +11,7 @@ class OrderStatus(str, Enum):
 
 class Order(BaseModel):
     user_id: int
-    created_by_id: int
+    created_by_id: int | None = None
     status: OrderStatus
 
 

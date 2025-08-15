@@ -16,6 +16,6 @@ class UpdateRole(Role):
     pass
 
 class RoleInDB(Role):
-    id: str
+    id: int
     created_at: datetime | None = None
     last_modified: datetime | None = None

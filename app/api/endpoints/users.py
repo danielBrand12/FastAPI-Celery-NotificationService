@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from typing_extensions import Annotated
+from fastapi import APIRouter, HTTPException, Security
 from fastapi.responses import JSONResponse
 
-from app.schemas.user import CreateUser, UserInDB
+from app.schemas.user import CreateUser, User, UserInDB, UpdateUser
 from app.service.user_service import user_service
-from app.security import get_password_hash
+from app.security import get_current_active_user, get_password_hash
 
 router = APIRouter()
 
@@ -36,3 +37,25 @@ async def create_user(user_in: CreateUser) -> UserInDB:
     new_user = await user_service.create(user_to_create)
 
     return new_user
+
+
+@router.patch(
+    "/{user_id}",
+    response_class=JSONResponse,
+    response_model=UserInDB,
+    status_code=200,
+    responses={
+        200: {"description": "User updated."},
+        400: {"description": "Bad request"},
+    },
+)
+async def update(
+    current_user: Annotated[User, Security(get_current_active_user, scopes=["update:user"])],
+    *, 
+    user_id: int, 
+    user_in: UpdateUser
+) -> UserInDB:
+    user = await user_service.update(user_id, user_in)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user

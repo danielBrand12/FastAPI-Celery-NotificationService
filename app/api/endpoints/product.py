@@ -50,7 +50,7 @@ async def get_all(
 async def create(
     *,
     product_in: CreateProduct,
-    current_user: Annotated[User, Security(get_current_active_user, scopes=["create"])]
+    current_user: Annotated[User, Security(get_current_active_user, scopes=["create:product"])],
 ) -> ProductInDB:
     product = await product_service.create(product_in)
     return product
