@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: debug",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 10004
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceRoot}",
+                    "remoteRoot": "."
+                }
+            ]
+        },
+        {
+            "name": "chatbot-genai",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "celery",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-A",
+                "app.worker.genai_worker",
+                //"app.celery_conf",
+                "worker",
+                "-Q",
+                "genai-chatbot",
+                "--loglevel=info",
+                "-c",
+                "1",
+                "--without-heartbeat",
+                "--without-gossip",
+                "--without-mingle",
+            ],
+        }
+    ]
+}
