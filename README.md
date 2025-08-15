@@ -29,7 +29,7 @@ These instructions will get you a copy of the project up and running on your loc
 1.  **Clone the repository:**
 
     ```bash
-    git clone [<repository-url>](https://github.com/danielBrand12/FastAPI-Celery-NotificationService)
+    git clone https://github.com/danielBrand12/FastAPI-Celery-NotificationService
     cd FastAPI-Celery-NotificationService
     ```
 
